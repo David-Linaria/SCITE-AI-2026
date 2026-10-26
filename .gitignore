@@ -1,0 +1,82 @@
+# ========================================
+# Python
+# ========================================
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# ========================================
+# Jupyter Notebook
+# ========================================
+
+.ipynb_checkpoints/
+
+# ========================================
+# IDE and Editor
+# ========================================
+
+# VS Code (local settings)
+.vscode/
+
+# PyCharm
+.idea/
+
+# ========================================
+# macOS
+# ========================================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ========================================
+# Testing and Cache
+# ========================================
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ========================================
+# Machine Learning
+# ========================================
+
+# Trained models and checkpoints
+*.h5
+*.keras
+*.ckpt
+*.pth
+*.pt
+*.joblib
+*.pkl
+
+# TensorFlow logs
+logs/
+events.out.tfevents.*
+
+# ========================================
+# Temporary Files
+# ========================================
+
+*.log
+*.tmp
+*.bak
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
