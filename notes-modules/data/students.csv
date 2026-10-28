@@ -1,7 +1,7 @@
-StudentID,Class,Name,Math,English,Python
-S001,A,Alice,80,90,70
-S002,A,Bob,85,95,90
-S003,B,Charlie,60,75,80
-S004,B,Diana,90,,95
-S005,A,Eva,not_recorded,88,92
-S006,B,Frank,75,85,80
+StudentID, Class, Name   , Math        , English, Python
+S001     , A    , Alice  , 80          ,      90,     70
+S002     , A    , Bob    , 85          ,      95,     90
+S003     , B    , Charlie, 60          ,      75,     80
+S004     , B    , Diana  , 90          ,        ,     95
+S005     , A    , Eva    , not_recorded,      88,     92
+S006     , B    , Frank  , 75          ,      85,     80
