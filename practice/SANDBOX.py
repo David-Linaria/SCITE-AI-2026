@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 # X = np.array(
 #     [
@@ -49,24 +50,45 @@ import numpy as np
 
 # print(f'{np.shape([5,10])}')
 
-X = np.array(
-    [
-        [2, 10],
-        [4, 20],
-        [6, 30],
-    ],
-    dtype=float,
+# X = np.array(
+#     [
+#         [2, 10],
+#         [4, 20],
+#         [6, 30],
+#     ],
+#     dtype=float,
+# )
+
+# X_mean = np.mean(X, axis=0)
+# X_std = np.std(X, axis=0)
+
+# X_standardized = (X - X_mean) / X_std
+# X_standardized_mean = np.mean(X_standardized, axis=0)
+
+# condition = np.allclose(
+#     X_standardized_mean, 0
+# )  # or `condition = np.isclose(X_standardized_mean, 0)` which outputs a tuple of boolean values.
+
+# print(X_standardized)
+# print(condition)
+
+
+df = pd.DataFrame(
+    {
+        "Name": ["Alice", "Bob", "Charlie"],
+        "Math": [80, 85, 60],
+        "English": [90, 95, 75],
+        "Python": [70, 90, 80],
+    },
+    index=["S001", "S002", "S003"],
 )
 
-X_mean = np.mean(X, axis=0)
-X_std = np.std(X, axis=0)
+average = df.mean(axis=1, numeric_only=True)
+df["Average"] = average
 
-X_standardized = (X - X_mean) / X_std
-X_standardized_mean = np.mean(X_standardized, axis=0)
+students_selected = df.loc[
+    df["Average"] >= 85,
+    ["Name", "Average"],
+]
 
-condition = np.allclose(
-    X_standardized_mean, 0
-)  # or `condition = np.isclose(X_standardized_mean, 0)` which outputs a tuple of boolean values.
-
-print(X_standardized)
-print(condition)
+print(students_selected)
