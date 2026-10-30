@@ -16,8 +16,20 @@ y = np.array([0, 0, 1, 1, 0, 1])
 
 fig, ax = plt.subplots()
 
-ax.scatter(X[y == 0, 0], X[y == 0, 1], c="#027DD0", marker="o", label="Class 0")
-ax.scatter(X[y == 1, 0], X[y == 1, 1], c="#FE141B", marker="^", label="Class 1")
+ax.scatter(
+    X[y == 0, 0],
+    X[y == 0, 1],
+    c="#027DD0",
+    marker="o",
+    label="Class 0",
+)
+ax.scatter(
+    X[y == 1, 0],
+    X[y == 1, 1],
+    c="#FE141B",
+    marker="^",
+    label="Class 1",
+)
 
 ax.set_xlabel("Feature 1")
 ax.set_ylabel("Feature 2")
