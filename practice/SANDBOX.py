@@ -1,5 +1,64 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
+X = np.array(
+    [
+        [1.0, 2.0],
+        [1.5, 2.8],
+        [2.0, 1.5],
+        [3.0, 3.8],
+        [3.5, 2.5],
+        [4.0, 4.5],
+    ]
+)
+y = np.array([0, 0, 1, 1, 0, 1])
+
+fig, ax = plt.subplots()
+
+ax.scatter(X[y == 0, 0], X[y == 0, 1], c="#027DD0", marker="o", label="Class 0")
+ax.scatter(X[y == 1, 0], X[y == 1, 1], c="#FE141B", marker="^", label="Class 1")
+
+ax.set_xlabel("Feature 1")
+ax.set_ylabel("Feature 2")
+ax.set_title("Classification Dataset")
+ax.legend(loc="upper right")
+ax.grid(True, alpha=0.3)
+
+plt.show()
+
+
+# epochs = np.array([1, 2, 3, 4, 5])
+# train_loss = np.array([0.90, 0.65, 0.48, 0.35, 0.28])
+# val_loss = np.array([0.95, 0.72, 0.55, 0.49, 0.52])
+
+# fig, ax = plt.subplots(figsize=(10, 4))
+
+# ax.plot(
+#     epochs,
+#     train_loss,
+#     color="#027DD0",
+#     marker="o",
+#     linestyle="-",
+#     label="Training Loss",
+# )
+# ax.plot(
+#     epochs,
+#     val_loss,
+#     color="#FE141B",
+#     marker="s",
+#     linestyle="--",
+#     label="Validation Loss",
+# )
+
+# ax.set_title("Training History")
+# ax.set_xlabel("Epoch")
+# ax.set_ylabel("Loss")
+# ax.legend(loc="upper right")
+# ax.grid(True)
+
+# plt.show()
+
 
 # X = np.array(
 #     [
@@ -73,22 +132,22 @@ import pandas as pd
 # print(condition)
 
 
-df = pd.DataFrame(
-    {
-        "Name": ["Alice", "Bob", "Charlie"],
-        "Math": [80, 85, 60],
-        "English": [90, 95, 75],
-        "Python": [70, 90, 80],
-    },
-    index=["S001", "S002", "S003"],
-)
+# df = pd.DataFrame(
+#     {
+#         "Name": ["Alice", "Bob", "Charlie"],
+#         "Math": [80, 85, 60],
+#         "English": [90, 95, 75],
+#         "Python": [70, 90, 80],
+#     },
+#     index=["S001", "S002", "S003"],
+# )
 
-average = df.mean(axis=1, numeric_only=True)
-df["Average"] = average
+# average = df.mean(axis=1, numeric_only=True)
+# df["Average"] = average
 
-students_selected = df.loc[
-    df["Average"] >= 85,
-    ["Name", "Average"],
-]
+# students_selected = df.loc[
+#     df["Average"] >= 85,
+#     ["Name", "Average"],
+# ]
 
-print(students_selected)
+# print(students_selected)
