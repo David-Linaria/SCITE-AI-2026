@@ -4,21 +4,25 @@ import pandas as pd
 
 X = np.array(
     [
-        [1.0, 2.0],
-        [1.5, 2.8],
-        [2.0, 1.5],
-        [3.0, 3.8],
-        [3.5, 2.5],
-        [4.0, 4.5],
+        [1, 2, 3],
+        [2, 3, 2],
+        [3, 2, 4],
+        [5, 6, 7],
+        [6, 5, 8],
+        [7, 7, 6],
     ]
 )
-y = np.array([0, 0, 1, 1, 0, 1])
+y = np.array([0, 0, 0, 1, 1, 1])
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(
+    figsize=(10, 8),
+    subplot_kw={"projection": "3d"},
+)
 
 ax.scatter(
     X[y == 0, 0],
     X[y == 0, 1],
+    X[y == 0, 2],
     c="#027DD0",
     marker="o",
     label="Class 0",
@@ -26,6 +30,7 @@ ax.scatter(
 ax.scatter(
     X[y == 1, 0],
     X[y == 1, 1],
+    X[y == 1, 2],
     c="#FE141B",
     marker="^",
     label="Class 1",
@@ -33,11 +38,48 @@ ax.scatter(
 
 ax.set_xlabel("Feature 1")
 ax.set_ylabel("Feature 2")
-ax.set_title("Classification Dataset")
-ax.legend(loc="upper right")
-ax.grid(True, alpha=0.3)
+ax.set_zlabel("Feature 3")
+ax.set_title("3D Classification Dataset")
+ax.legend(loc="upper left")
 
 plt.show()
+
+# X = np.array(
+#     [
+#         [1.0, 2.0],
+#         [1.5, 2.8],
+#         [2.0, 1.5],
+#         [3.0, 3.8],
+#         [3.5, 2.5],
+#         [4.0, 4.5],
+#     ]
+# )
+# y = np.array([0, 0, 1, 1, 0, 1])
+
+# fig, ax = plt.subplots()
+
+# ax.scatter(
+#     X[y == 0, 0],
+#     X[y == 0, 1],
+#     c="#027DD0",
+#     marker="o",
+#     label="Class 0",
+# )
+# ax.scatter(
+#     X[y == 1, 0],
+#     X[y == 1, 1],
+#     c="#FE141B",
+#     marker="^",
+#     label="Class 1",
+# )
+
+# ax.set_xlabel("Feature 1")
+# ax.set_ylabel("Feature 2")
+# ax.set_title("Classification Dataset")
+# ax.legend(loc="upper right")
+# ax.grid(True, alpha=0.3)
+
+# plt.show()
 
 
 # epochs = np.array([1, 2, 3, 4, 5])
