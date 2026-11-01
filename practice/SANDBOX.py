@@ -1,48 +1,116 @@
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
+from sklearn.datasets import make_classification
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.model_selection import cross_val_score, train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
-X = np.array(
-    [
-        [1, 2, 3],
-        [2, 3, 2],
-        [3, 2, 4],
-        [5, 6, 7],
-        [6, 5, 8],
-        [7, 7, 6],
-    ]
-)
-y = np.array([0, 0, 0, 1, 1, 1])
-
-fig, ax = plt.subplots(
-    figsize=(10, 8),
-    subplot_kw={"projection": "3d"},
+X, y = make_classification(
+    n_samples=300,
+    n_features=6,
+    n_informative=4,
+    n_redundant=0,
+    random_state=42,
 )
 
-ax.scatter(
-    X[y == 0, 0],
-    X[y == 0, 1],
-    X[y == 0, 2],
-    c="#027DD0",
-    marker="o",
-    label="Class 0",
-)
-ax.scatter(
-    X[y == 1, 0],
-    X[y == 1, 1],
-    X[y == 1, 2],
-    c="#FE141B",
-    marker="^",
-    label="Class 1",
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y,
 )
 
-ax.set_xlabel("Feature 1")
-ax.set_ylabel("Feature 2")
-ax.set_zlabel("Feature 3")
-ax.set_title("3D Classification Dataset")
-ax.legend(loc="upper left")
+model = make_pipeline(
+    StandardScaler(),
+    KNeighborsClassifier(n_neighbors=5),
+)
 
-plt.show()
+scores = cross_val_score(
+    model,
+    X_train,
+    y_train,
+    cv=5,
+    scoring="accuracy",
+)
+
+print(f"CV Mean:{scores.mean()}")
+
+final_model = make_pipeline(
+    StandardScaler(),
+    KNeighborsClassifier(n_neighbors=5),
+)
+
+final_model.fit(X_train, y_train)
+y_predict = final_model.predict(X_test)
+
+print(f"Accuracy: {accuracy_score(y_test, y_predict)}")
+print(f"Confusion Matrix:\n{confusion_matrix(y_test, y_predict)}")
+print(f"Classification Report:\n{classification_report(y_test, y_predict)}")
+
+
+# iris = load_iris()
+# X = iris.data
+# y = iris.target
+
+# X_train, X_test, y_train, y_test = train_test_split(
+#     X,
+#     y,
+#     test_size=0.2,
+#     random_state=42,
+#     stratify=y,
+# )
+
+# model = make_pipeline(
+#     StandardScaler(),
+#     KNeighborsClassifier(n_neighbors=5),
+# )
+
+# model.fit(X_train, y_train)
+
+# print(f"Test accuracy: {model.score(X_test, y_test)}")
+
+# X = np.array(
+#     [
+#         [1, 2, 3],
+#         [2, 3, 2],
+#         [3, 2, 4],
+#         [5, 6, 7],
+#         [6, 5, 8],
+#         [7, 7, 6],
+#     ]
+# )
+# y = np.array([0, 0, 0, 1, 1, 1])
+
+# fig, ax = plt.subplots(
+#     figsize=(10, 8),
+#     subplot_kw={"projection": "3d"},
+# )
+
+# ax.scatter(
+#     X[y == 0, 0],
+#     X[y == 0, 1],
+#     X[y == 0, 2],
+#     c="#027DD0",
+#     marker="o",
+#     label="Class 0",
+# )
+# ax.scatter(
+#     X[y == 1, 0],
+#     X[y == 1, 1],
+#     X[y == 1, 2],
+#     c="#FE141B",
+#     marker="^",
+#     label="Class 1",
+# )
+
+# ax.set_xlabel("Feature 1")
+# ax.set_ylabel("Feature 2")
+# ax.set_zlabel("Feature 3")
+# ax.set_title("3D Classification Dataset")
+# ax.legend(loc="upper left")
+
+# plt.show()
 
 # X = np.array(
 #     [
