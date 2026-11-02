@@ -1,52 +1,95 @@
-from sklearn.datasets import make_classification
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.model_selection import cross_val_score, train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
 
-X, y = make_classification(
-    n_samples=300,
-    n_features=6,
-    n_informative=4,
-    n_redundant=0,
-    random_state=42,
+X = np.array(
+    [
+        [1, 10],
+        [2, 15],
+        [3, 20],
+        [4, 25],
+        [5, 30],
+        [6, 35],
+        [7, 40],
+        [8, 45],
+        [9, 50],
+        [10, 55],
+    ],
+    dtype=float,
 )
+y = np.array([20, 29, 37, 48, 54, 65, 71, 82, 89, 101], dtype=float)
 
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
     test_size=0.2,
     random_state=42,
-    stratify=y,
 )
 
-model = make_pipeline(
-    StandardScaler(),
-    KNeighborsClassifier(n_neighbors=5),
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+print("Coefficients: ", model.coef_)
+print("Intercept: ", model.intercept_)
+
+y_pred = model.predict(X_test)
+print("MAE: ", mean_absolute_error(y_pred, y_test))
+print("MSE: ", mean_squared_error(y_pred, y_test))
+print("R2: ", r2_score(y_pred, y_test))
+
+new_X = np.array(
+    [
+        [11, 60],
+    ]
 )
+new_y = model.predict(new_X)
 
-scores = cross_val_score(
-    model,
-    X_train,
-    y_train,
-    cv=5,
-    scoring="accuracy",
-)
+print("Predicted new y: ", new_y)
 
-print(f"CV Mean:{scores.mean()}")
 
-final_model = make_pipeline(
-    StandardScaler(),
-    KNeighborsClassifier(n_neighbors=5),
-)
+# X, y = make_classification(
+#     n_samples=300,
+#     n_features=6,
+#     n_informative=4,
+#     n_redundant=0,
+#     random_state=42,
+# )
 
-final_model.fit(X_train, y_train)
-y_predict = final_model.predict(X_test)
+# X_train, X_test, y_train, y_test = train_test_split(
+#     X,
+#     y,
+#     test_size=0.2,
+#     random_state=42,
+#     stratify=y,
+# )
 
-print(f"Accuracy: {accuracy_score(y_test, y_predict)}")
-print(f"Confusion Matrix:\n{confusion_matrix(y_test, y_predict)}")
-print(f"Classification Report:\n{classification_report(y_test, y_predict)}")
+# model = make_pipeline(
+#     StandardScaler(),
+#     KNeighborsClassifier(n_neighbors=5),
+# )
+
+# scores = cross_val_score(
+#     model,
+#     X_train,
+#     y_train,
+#     cv=5,
+#     scoring="accuracy",
+# )
+
+# print(f"CV Mean:{scores.mean()}")
+
+# final_model = make_pipeline(
+#     StandardScaler(),
+#     KNeighborsClassifier(n_neighbors=5),
+# )
+
+# final_model.fit(X_train, y_train)
+# y_predict = final_model.predict(X_test)
+
+# print(f"Accuracy: {accuracy_score(y_test, y_predict)}")
+# print(f"Confusion Matrix:\n{confusion_matrix(y_test, y_predict)}")
+# print(f"Classification Report:\n{classification_report(y_test, y_predict)}")
 
 
 # iris = load_iris()
